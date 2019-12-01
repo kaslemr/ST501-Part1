@@ -1,0 +1,57 @@
+---
+title: "Part 1 - Kera"
+output: html_notebook
+---
+
+2. To visualize this we’ll simulate data and approximate the probability statement proven in the previous part.
+(a) For a sample size of n = 1, generate N = 1000 data sets from an exp(1) distribution.
+(b) For each data set, find the minimum value (for a sample of size 1 that will just be the value itself).
+(c) Save these minimum values for plotting.
+
+```{r}
+N <- 1000
+Exp_Data_set <- c()
+x <- N
+while(x >0){
+x <- x-1
+Exp_Data_set <- c(Exp_Data_set, rexp(1))
+}
+#print(Exp_Data_set)
+```
+
+3. Consider an epsilon of 0.05. Approximate the probability of interest (P(|Y(1) − 0| < epsilon)) using these 1000 simulated minimum values. (This is a Monte Carlo estimate of the probability.) Save this probability
+
+```{r}
+
+```
+
+4. Repeat the above simulation and approximation of the probability of interest for n =2, 3, ..., 50
+
+```{r}
+
+```
+
+5. Create a plot with the sample size on the x-axis and the probability of interest on the y-axis. All created plots should have titles and appropriate axis labels.
+
+```{r}
+
+```
+
+6. In a comment explain how this plot can help someone understand convergence in probability to a constant.
+
+```{r}
+
+```
+
+7. You should also have the 1000 values of the minimum for each n saved from above. Create a plot with the sample size on the x-axis and the values of the minimum on the y-axis. (You should have 1000 values plotted above n = 1, 1000 plotted above n = 2, etc.). All created plots should have titles and appropriate axis labels.
+
+```{r}
+
+```
+
+8. In a comment explain how this plot can help someone understand convergence in probability to a constant.
+
+```{r}
+
+```
+

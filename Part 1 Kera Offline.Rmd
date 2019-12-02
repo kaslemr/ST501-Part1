@@ -1,0 +1,102 @@
+---
+title: "Part 1 - Kera"
+output: html_notebook
+---
+
+2. To visualize this we’ll simulate data and approximate the probability statement proven in the previous part.
+(a) For a sample size of n = 1, generate N = 1000 data sets from an exp(1) distribution.
+(b) For each data set, find the minimum value (for a sample of size 1 that will just be the value itself).
+(c) Save these minimum values for plotting.
+
+```{r}
+#Part a
+N <- 1000
+Exp_Data_set <- c()
+x <- 0
+while(x < N){
+  Exp_Data_set <- c(Exp_Data_set, rexp(1, rate = 1))
+  x <- x + 1
+}
+#To reset x so the while loop can run again
+x <- 0
+
+Exp_Data_Matrix <- cbind(Exp_Data_set)
+
+#Part b
+Exp_Min_Data <- c()
+while(x < N){
+  Exp_Min_Data <- c(Exp_Min_Data, min(Exp_Data_Matrix[x + 1,]))
+  x <- x + 1
+}
+x <- 0
+Exp_Min_Data_Matrix <- cbind(Exp_Min_Data)
+
+#Part c
+Exp_Plot_Data_1 <- Exp_Min_Data_Matrix
+
+```
+
+3. Consider an epsilon of 0.05. Approximate the probability of interest (P(|Y(1) − 0| < epsilon)) using these 1000 simulated minimum values. (This is a Monte Carlo estimate of the probability.) Save this probability
+
+```{r}
+epsi <- 0.05
+
+
+```
+
+4. Repeat the above simulation and approximation of the probability of interest for n =2, 3, ..., 50
+
+```{r}
+Exp_Data <- c()
+n <- 50
+x <- 0
+y <- 0
+
+while(x < N * n){
+  Exp_Data <- c(Exp_Data, rexp(1, rate = 1))
+  x <- x + 1
+}
+x <- 0
+y <- 0
+
+Exp_Matrix <- matrix(Exp_Data, nrow = 1000)
+
+Min_Matrix <- c()
+Min_Data_50 <- c()
+
+while(x < N){
+  Min_Data_50 <- c(Min_Data_50, min(Exp_Matrix[x + 1,]))
+  x <- x + 1
+  #y <- y + 1
+}
+x <- 0
+#y <- 0
+#Min_Matrix <- cbind(Min_Data_50)
+
+Plot_Data_50 <- Min_Matrix
+```
+
+5. Create a plot with the sample size on the x-axis and the probability of interest on the y-axis. All created plots should have titles and appropriate axis labels.
+
+```{r}
+
+```
+
+6. In a comment explain how this plot can help someone understand convergence in probability to a constant.
+
+```{r}
+
+```
+
+7. You should also have the 1000 values of the minimum for each n saved from above. Create a plot with the sample size on the x-axis and the values of the minimum on the y-axis. (You should have 1000 values plotted above n = 1, 1000 plotted above n = 2, etc.). All created plots should have titles and appropriate axis labels.
+
+```{r}
+
+```
+
+8. In a comment explain how this plot can help someone understand convergence in probability to a constant.
+
+```{r}
+
+```
+

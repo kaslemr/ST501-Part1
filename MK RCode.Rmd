@@ -22,13 +22,13 @@ firstProb <- sum(mins < 0.5) / N
 4)
 ```{r}
 results <- c()
-results[i] <- firstProb
+results[[1]] <- firstProb
 
 for (j in 2:50){
     for (i in 1:N) {
         mins[i]<-min(rexp(n=j))
     }
-    results[j] <- sum(mins < 0.5) / N
+    results[[j]] <- sum(mins < 0.5) / N
     minimums[[j]] <- mins
 }
 ```

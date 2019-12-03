@@ -2,6 +2,24 @@
 title: "Part 1 - Kera"
 output: html_notebook
 ---
+1. Show that the minimum order statistic converges in probability to 0. Hint: We know
+the CDF of an exponential and how to find the CDF of the minimum order statistic.
+Start with the probability you want to show from the definition of convergence in
+probability to 0 (P(|Y(1) - 0| < e)) and take the limit as n goes to infinity and show
+this is 1.
+
+If a sequence of random variables, {Zn}, is such that P(|Zn−α| > e) approaches
+zero as n approaches infinity, for any e > 0 and where α is some scalar, then Zn is
+said to converge in probability to α.
+
+lim n-> inf P(|Yn - c| >= e) = 0
+lim n-> inf P(|Yn - c| < e) = 1
+c = 0
+lim n-> inf P(|Yn| < e) = 1
+Distribution of the minimum: n*fY(y)[1-FY(y)]^(n-1)
+lim n-> inf P(|Yn| >= e) = 0
+
+
 
 2. To visualize this we’ll simulate data and approximate the probability statement proven in the previous part.
 (a) For a sample size of n = 1, generate N = 1000 data sets from an exp(1) distribution.

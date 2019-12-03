@@ -1,0 +1,54 @@
+---
+title: "ST 501 RProject-MK"
+output: html_document
+---
+
+## R Markdown
+
+
+
+```{#2}
+N <- 1000
+minimums <- c()
+mins <- rep(0, N)
+for (i in 1:N){
+  mins[i] <- min(rexp(n=1))
+}
+minimums[[1]] <- mins
+```
+
+```{#3}
+firstProb <- sum(mins < 0.5) / N
+```
+
+```{#4}
+results <- c()
+results[i] <- firstProb
+
+for (j in 2:50){
+    for (i in 1:N) {
+        mins[i]<-min(rexp(n=j))
+    }
+    results[j] <- sum(mins < 0.5) / N
+    minimums[[j]] <- mins
+}
+```
+
+```{#5}
+plot(x = 1:50, y = results)
+```
+
+```{#6}
+Commentary
+```
+
+```{#7}
+plot(x = rep(1, N), y = minimums[[1]])
+for (i in 3:50){
+    point(x <- rep(i, N), y <- minimums[[i]])
+}
+```
+
+```{#8}
+Commentary
+```

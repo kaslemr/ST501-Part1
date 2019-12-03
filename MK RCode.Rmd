@@ -42,9 +42,9 @@ plot(x = 1:50, y = results)
 
 7)
 ```{r}
-plot(x = rep(1, N), y = minimums[[1]])
-for (i in 3:50){
-    point(x <- rep(i, N), y <- minimums[[i]])
+plot(x = rep(1, N), y = minimums[[1]], xlim=range(1:50), pch = 19, cex=.4)
+for (i in 1:50){
+    points(x <- rep(i, N), y <- minimums[[i]], pch = 19, cex=.4)
 }
 ```
 

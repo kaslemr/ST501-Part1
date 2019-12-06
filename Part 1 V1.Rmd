@@ -1,0 +1,84 @@
+---
+title: "Part 1 Version 1"
+output: html_notebook
+---
+1. Show that the minimum order statistic converges in probability to 0. Hint: We know
+the CDF of an exponential and how to find the CDF of the minimum order statistic.
+Start with the probability you want to show from the definition of convergence in
+probability to 0 (P(|Y(1) - 0| < e)) and take the limit as n goes to infinity and show
+this is 1.
+
+lim n-> inf P(|Yn - c| >= e) = 0
+lim n-> inf P(|Yn - c| < e) = 1
+c = 0
+FY(y) = 1 - e^-x
+lim n-> inf P(|Yn| < e) = 1
+FY(1)(y) = P(Y(1) < e) = 1 - [1 - FY(e)]^n
+lim n-> inf FY(1)(y) = lim n-> inf 1 - [1 - (1 - e^-x)]^n
+lim n-> inf FY(1)(y) = lim n-> inf 1 - [1 - 1 + e^-x]^n
+lim n-> inf FY(1)(y) = lim n-> inf 1 - [e^-x]^n
+lim n-> inf e^-xn = 0
+Therefore: lim n-> inf 1 - [e^-x]^n = 1 = lim n-> inf P(|Yn| < e)
+Therefore: lim n-> inf P(|Yn| >= e) = 0
+
+
+
+2. To visualize this we’ll simulate data and approximate the probability statement proven in the previous part.
+(a) For a sample size of n = 1, generate N = 1000 data sets from an exp(1) distribution.
+(b) For each data set, find the minimum value (for a sample of size 1 that will just be the value itself).
+(c) Save these minimum values for plotting.
+
+```{r}
+N <- 1000
+minimums <- c()
+mins <- rep(0, N)
+for (i in 1:N){
+  mins[i] <- min(rexp(n=1))
+}
+minimums[[1]] <- mins
+
+```
+
+3. Consider an epsilon of 0.05. Approximate the probability of interest (P(|Y(1) − 0| < epsilon)) using these 1000 simulated minimum values. (This is a Monte Carlo estimate of the probability.) Save this probability
+
+```{r}
+firstProb <- sum(mins < 0.5) / N
+
+```
+
+4. Repeat the above simulation and approximation of the probability of interest for n =2, 3, ..., 50
+
+```{r}
+results <- c()
+results[[1]] <- firstProb
+
+for (j in 2:50){
+    for (i in 1:N) {
+        mins[i]<-min(rexp(n=j))
+    }
+    results[[j]] <- sum(mins < 0.5) / N
+    minimums[[j]] <- mins
+}
+```
+
+5. Create a plot with the sample size on the x-axis and the probability of interest on the y-axis. All created plots should have titles and appropriate axis labels.
+
+```{r}
+plot(x = 1:50, y = results, pch = 19, cex=.8)
+```
+
+6. In a comment explain how this plot can help someone understand convergence in probability to a constant.
+
+
+
+7. You should also have the 1000 values of the minimum for each n saved from above. Create a plot with the sample size on the x-axis and the values of the minimum on the y-axis. (You should have 1000 values plotted above n = 1, 1000 plotted above n = 2, etc.). All created plots should have titles and appropriate axis labels.
+
+```{r}
+plot(x = rep(1, N), y = minimums[[1]], xlim=range(1:50), pch = 19, cex=.4)
+for (i in 1:50){
+    points(x <- rep(i, N), y <- minimums[[i]], pch = 19, cex=.4)
+}
+```
+
+8. In a comment explain how this plot can help someone understand convergence in probability to a constant.
+

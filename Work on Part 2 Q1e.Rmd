@@ -1,0 +1,43 @@
+---
+title: "Work on Part1 Q1e"
+output: html_document
+---
+1. Consider a sample size of n = 5 from a Poi(1) distribution.
+
+(a) Generate N = 50000 data sets of size n from the Poisson distribution.
+
+(b) For each data set, find the sample mean value (Hint: if you saved the above data in a large matrix the apply function or the colMeans or rowMeans functions can be handy here).
+
+(c) Create a histogram of the sample means. Make the bins of appropriate width so
+that each bin only has one value of the support. For instance, the possible values
+for the sample mean here are 0, 0.2, 0.4, 0.6, .... Make sure that each bar only
+has one of these values included (so the bins would go from say -0.1 to 0.1, 0.1 to
+0.3, 0.3 to 0.5, ...).
+
+(d) The Central Limit Theorem says that Ybar is well approximated by N(lamba, lambda/n). Overlay this large-sample distribution on the histogram (hint: use freq = FALSE on you histogram and the curve function with add = TRUE to overlay the normal distribution). All plots should have appropriate titles and axis labels.
+
+(e) Use the N = 50000 values to approximate the probability that Ybar is greater than
+or equal to lambda + 2 * sqrt(lambda/n). Also report this probability as approximated by the
+normal distribution (you can use a continuity correction if you'd like but that isn't required).
+
+```{r}
+#a
+N<-50000
+n<-5
+#b
+x<-colMeans(replicate(N,rpois(n,1)))
+min(x)
+max(x)
+#c
+hist(x,freq=F,breaks=seq(-0.1,max(x)+.2,.2),main="lambda=1 & n=5")
+#d
+curve(dnorm(x, mean=1, sd=1/n),add=TRUE)
+#e
+ybar <- mean(x)
+StandDev <- sd(x)
+equation <- 1 + 2 * sqrt(1/n)
+pois_prob_ybar <- 1 - ppois(equation, lambda = ybar)
+norm_prob_ybar <- 1 - pnorm(equation, mean = ybar, sd = StandDev)
+
+```
+
